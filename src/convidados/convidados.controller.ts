@@ -1,22 +1,30 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Patch,
     Post,
 } from '@nestjs/common';
+import { ConvidadosService } from './convidados.service.js';
 import { CreateConvidadoDto } from './dto/create-convidado.dto.js';
+import { UpdateConvidadoDto } from './dto/update-convidado.dto.js';
+
 @Controller('convidados')
 export class ConvidadosController {
-    private readonly convidados = [
-        'Ana',
-        'Bruno',
-        'Carlos',
-    ];
+    constructor(
+        private readonly convidadosService: ConvidadosService,
+    ) { }
+
     // GET /convidados
     @Get()
-    listarTodos(): string[] {
-        return this.convidados;
+    listarTodos() {
+        return this.convidadosService.findAll();
     }
+
     // POST /convidados
     @Post()
     criar(
@@ -26,9 +34,35 @@ export class ConvidadosController {
             'Convidado recebido:',
             createConvidadoDto.nome,
         );
+        const convidado = this.convidadosService.create(
+            createConvidadoDto,
+        );
         return {
-            mensagem: `Convidado ${createConvidadoDto.nome} confirmado com sucesso!`,
-            dados: createConvidadoDto,
+            mensagem: `Convidado ${convidado.nome} confirmado com sucesso!`,
+            dados: convidado,
         };
+    }
+
+    // PATCH /convidados/:id - altera apenas a idade do convidado indicado.
+    @Patch(':id')
+    atualizarIdade(
+        @Param('id') id: string,
+        @Body() updateConvidadoDto: UpdateConvidadoDto,
+    ) {
+        console.log(
+            `Atualizando idade do convidado com ID: ${id}`,
+        );
+        return this.convidadosService.updateIdade(
+            +id,
+            updateConvidadoDto,
+        );
+    }
+
+    // DELETE /convidados/:id
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    remover(@Param('id') id: string) {
+        console.log(`Removendo convidado com ID: ${id}`);
+        this.convidadosService.remove(+id);
     }
 }

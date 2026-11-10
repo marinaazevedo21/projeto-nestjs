@@ -1,4 +1,4 @@
 export class CreateConvidadoDto {
-    nome: string;
-    idade: number;
+  nome: string;
+  idade: number;
 }

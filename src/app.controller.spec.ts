@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Servidor Nest.js Ativo"', () => {
-      expect(appController.getHello()).toBe('Servidor Nest.js Ativo');
+    it('should return "Servidor Nest.js Ativo."', () => {
+      expect(appController.getHello()).toBe('Servidor Nest.js Ativo.');
     });
   });
 });

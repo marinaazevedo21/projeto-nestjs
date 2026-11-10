@@ -6,11 +6,9 @@ describe('LivrosService', () => {
   let service: LivrosService;
 
   beforeEach(async () => {
-    const module: TestingModule =
-      await Test.createTestingModule({
-        providers: [LivrosService],
-      }).compile();
-
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [LivrosService],
+    }).compile();
     service = module.get<LivrosService>(LivrosService);
   });
 
@@ -25,12 +23,10 @@ describe('LivrosService', () => {
       autor: 'Machado de Assis',
     });
   });
-
+  
   it('findOne deve lançar NotFoundException com a mensagem esperada', () => {
     expect(() => service.findOne(999)).toThrow(
-      new NotFoundException(
-        'Livro com ID 999 não localizado em nosso acervo',
-      ),
+      new NotFoundException('Livro com ID 999 não localizado em nosso acervo'),
     );
   });
 });

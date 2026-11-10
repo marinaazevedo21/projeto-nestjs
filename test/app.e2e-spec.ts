@@ -20,7 +20,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/api')
       .expect(200)
-      .expect('Servidor Nest.js Ativo');
+      .expect('Servidor Nest.js Ativo.');
   });
 
   afterEach(async () => {

@@ -11,6 +11,7 @@ import { AdminController } from './admin/admin.controller.js';
 import { LoggerMiddleware } from './logger/logger.middleware.js';
 import { ProdutosController } from './produtos/produtos.controller.js';
 import { ProdutosService } from './produtos/produtos.service.js';
+import { ColaboradoresController } from './colaboradores/colaboradores.controller.js';
 
 @Module({
 imports: [],
@@ -22,6 +23,7 @@ MediaController,
 SegurancaController,
 AdminController,
 ProdutosController,
+ColaboradoresController,
 ],
 providers: [
 AppService,
